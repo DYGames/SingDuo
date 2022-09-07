@@ -11,11 +11,10 @@ class SongListRecyclerAdapter : RecyclerView.Adapter<SongListRecyclerAdapter.Son
 
     inner class SongListViewHolder(private val binding: ViewSonglistRecyclerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: String) {
-
+        fun bind(data: String, idx: Int) {
             binding.songlistTitle.text = data
             binding.root.setOnClickListener {
-                (binding.root.context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_main, SongFragment(data.toInt())).addToBackStack(null).commitAllowingStateLoss()
+                (binding.root.context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.frame_main, SongFragment(idx)).addToBackStack(null).commitAllowingStateLoss()
             }
         }
     }
@@ -27,7 +26,7 @@ class SongListRecyclerAdapter : RecyclerView.Adapter<SongListRecyclerAdapter.Son
     }
 
     override fun onBindViewHolder(holder: SongListViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], position)
     }
 
     override fun getItemCount(): Int {
